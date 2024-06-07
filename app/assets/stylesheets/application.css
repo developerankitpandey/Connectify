@@ -1,0 +1,103 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ :root {
+    --main-color: #3498db;
+    --secondary-color: #2ecc71;
+    --standard-font-size: 52px;
+  }
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.background-section {
+    height: 100vh;
+    width: 100%;
+    /* background-color: #e8f9fd; */
+    z-index: -9;
+    
+}
+.devise-alert{
+    position: absolute;
+}
+.fixed-background-vdo {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+    position: fixed;
+}
+
+.main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* background-color: #ff0028; */
+    /* position: relative; */
+  background-color: rgba(0, 0, 0, 0.39);
+}
+.welcome-text {
+    font-size: var(--standard-font-size);
+    color: var(--secondary-color);
+} 
+.main, h2{
+    color: white;
+}
+
+.secondary-main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #fff5d7;
+    /* position: relative; */
+}
+.feature-section {
+  height: 100vh;
+  width: 100%;
+  /* background-color: #d8b344; */
+  background-color: rgba(0, 0, 0, 0.39);
+  display: flex;
+  align-items: center;
+  
+}
+.feature-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  .feature-list li {
+    display: flex;
+    align-items: start;
+    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  .feature-list li strong {
+    color: #007bff;
+    margin-right: 0.5rem;
+  }
+  .feature-list .icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: #17a2b8;
+  }
+.text-primary {
+  font-size: 3rem;
+}
+
