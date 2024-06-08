@@ -16,6 +16,15 @@
     <%= form.text_field :caption, class: "form-control mx-2 my-3" %>
   </div>
 
+  <div class="field">
+    <% post.images.each do |image| %>
+      <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+    <% end %>
+    
+    <%= form.label :images, class: "form-label" %>
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
+  </div>
+
   <div>
     <%= form.submit class: "btn btn-primary my-3" %>
   </div>

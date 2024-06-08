@@ -24,6 +24,9 @@
     padding: 0px;
 }
 
+body {
+  background-color: hsl(180, 23%, 97%);
+}
 .background-section {
     height: 100vh;
     width: 100%;
@@ -101,12 +104,12 @@
   font-size: 3rem;
 }
 
-.post-section{
+/* .post-section{
     height: 100vh;
     width: 100%;
     /* position: fixed; */
     
-}
+} */
 
 .all-posts-section{
     height: 100%;

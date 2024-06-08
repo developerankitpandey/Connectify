@@ -3,5 +3,10 @@
     <strong>Caption:</strong>
     <%= post.caption %>
   </p>
-
+ 
+  <% if post.images.attached? %>
+    <% post.images.each do |image| %>
+        <%= image_tag image, width: "410px", height: "600px" %>
+    <% end %>
+  <% end %>
 </div>
