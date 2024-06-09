@@ -13,3 +13,8 @@
   <small><%= time_ago_in_words(post.created_at)%> ago</small>
   </p>
 </div>
+
+<details>
+  <summary>comment</summary>
+   <%= render post.comments.where(parent_id: nil) %>
+</details>
