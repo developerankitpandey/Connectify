@@ -120,3 +120,8 @@ body {
     height: 100vh;
     width: 100%;
 }
+
+.card-img-top-fixed {
+  height: 510px; /* Adjust this height as needed */
+  object-fit: cover; /* This ensures the image covers the container without distortion */
+}

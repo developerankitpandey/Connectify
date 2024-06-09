@@ -1,0 +1,70 @@
+<section class="all-posts-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="posts" class="row">
+          <% @posts.each do |post| %>
+            <div class="col-md-4 mb-4">
+              <div class="card h-100">
+                <% if post.images.attached? %>
+                  <% if post.images.count == 1 %>
+                    <% image = post.images.first %>
+                    <%= image_tag image, class: "card-img-top card-img-top-fixed" , data: { url: post_path(post) } %>
+                  <% else %>
+                    <div id="carousel-<%= post.id %>" class="carousel slide" data-bs-ride="carousel">
+                      <div class="carousel-inner">
+                        <% post.images.each_with_index do |image, index| %>
+                          <div class="carousel-item <%= 'active' if index == 0 %>">
+                            <%= link_to image_tag(image, class: "d-block w-100 card-img-top card-img-top-fixed"), post_path(post) %>
+                          </div>
+                        <% end %>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= post.id %>" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= post.id %>" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <%= link_to image_tag("placeholder.jpg", class: "card-img-top card-img-top-fixed", alt: "No image available"), post_path(post) %>
+                <% end %>
+                <div class="card-body">
+                  <p class="card-text"><%= post.user.email %></p>
+                  <h5 class="card-title"><%= post.caption %></h5>
+                  <p class= "card-text text-muted"> 
+                  <small><%= time_ago_in_words(post.created_at)%> ago</p></small>
+                </div>
+                <div class="card-footer">
+                  <%= link_to "Show this post", post, class: "btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.card-img-top');
+
+    images.forEach(image => {
+      let tappedOnce = false;
+
+      image.addEventListener('click', function() {
+        if (tappedOnce) {
+          window.location.href = this.dataset.url;
+        } else {
+          tappedOnce = true;
+          setTimeout(() => tappedOnce = false, 300); // reset tap after 300ms
+        }
+      });
+    });
+  });
+</script>

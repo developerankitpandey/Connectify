@@ -1,12 +1,15 @@
 <div id="<%= dom_id post %>">
-  <p>
-    <strong>Caption:</strong>
-    <%= post.caption %>
-  </p>
- 
   <% if post.images.attached? %>
     <% post.images.each do |image| %>
         <%= image_tag image, width: "410px", height: "600px" %>
     <% end %>
   <% end %>
+
+  <p class= "my-2 mx-2">
+    <strong>Caption:</strong>
+    <%= post.caption %>
+  </p>
+  <p class= "card-text text-muted mx-2"> 
+  <small><%= time_ago_in_words(post.created_at)%> ago</small>
+  </p>
 </div>
