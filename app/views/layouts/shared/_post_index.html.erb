@@ -9,7 +9,7 @@
                 <% if post.images.attached? %>
                   <% if post.images.count == 1 %>
                     <% image = post.images.first %>
-                    <%= image_tag image, class: "card-img-top card-img-top-fixed" , data: { url: post_path(post) } %>
+                    <%= image_tag image, class: "card-img-top card-img-top-fixed", data: { url: post_path(post) } %>
                   <% else %>
                     <div id="carousel-<%= post.id %>" class="carousel slide" data-bs-ride="carousel">
                       <div class="carousel-inner">
@@ -35,26 +35,39 @@
                 <div class="card-body">
                   <p class="card-text"><%= post.user.email %></p>
                   <h5 class="card-title"><%= post.caption %></h5>
-                  <p class= "card-text text-muted"> 
-                  <small><%= time_ago_in_words(post.created_at)%> ago</small>
+                  <p class="card-text text-muted">
+                    <small><%= time_ago_in_words(post.created_at) %> ago</small>
                   </p>
                 </div>
                 <div class="card-footer">
-                  <span> <details>
-                    <summary>comment</summary>
-                    <%= render post.comments.where(parent_id: nil).order(created_at: :desc) %>
+                  <%= link_to "Comment", "#", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#commentsModal-#{post.id}" } %>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal Structure for Comments -->
+            <div class="modal fade" id="commentsModal-<%= post.id %>" tabindex="-1" aria-labelledby="commentsModalLabel-<%= post.id %>" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="commentsModalLabel-<%= post.id %>">Comments</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="comments-container-<%= post.id %>">
+                      <%= render post.comments.where(parent_id: nil).order(created_at: :desc) %>
+                    </div>
                     <h3>Add a comment</h3>
                     <%= form_with(model: [ post, post.comments.build ]) do |form| %>
-                      <div class= "form-group" >
+                      <div class="form-group">
                         <%= form.label :body %>
                         <%= form.text_area :body, class: "form-control" %>
                       </div>
-                      <div class= "form-group" >
+                      <div class="form-group mt-2">
                         <%= form.submit "Add comment", class: "btn btn-primary" %>
                       </div>
                     <% end %>
-                  </details>
-                  </span>
+                  </div>
                 </div>
               </div>
             </div>
