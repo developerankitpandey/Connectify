@@ -1,0 +1,28 @@
+<div class="comment mb-3">
+  <p><strong><%= comment.user.email %>:</strong> <%= comment.body %></p>
+  <small class="text-muted">
+    <%= time_ago_in_words(comment.created_at) %> ago
+  </small>
+
+  <% if comment.replies.any? %>
+    <div class="ml-4 sub-comments">
+      <% comment.replies.each do |reply| %>
+        <%= render reply %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="ml-4 mt-2">
+    <%= form_with(model: [ comment.post, comment.replies.build ]) do |form| %>
+      <%= form.hidden_field :parent_id, value: comment.id %>
+      <div class="form-group">
+        <details><summary>Reply</summary>
+        <%= form.label :body %>
+         <%= form.text_area :body %>
+        </details>
+      </div>
+      <div class="form-group mt-2">
+        <%= form.submit "submit", class: "btn btn-secondary btn-sm" %>
+      </div>
+    <% end %>
+  </div>
+</div>
