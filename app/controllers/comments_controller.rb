@@ -3,8 +3,8 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.build(comment_params)
+    @comment.user = current_user
       if @comment.save 
-        @comment.user = current_user
         redirect_to @post, notice: "Comment added successfully"
       else 
         redirect_to @post, notice: "Enter valid comment"
@@ -20,6 +20,10 @@ class CommentsController < ApplicationController
          redirect_to @post, notice: "Comment not found"
       end
   end
+
+  def comments 
+    @comments = @posts.comments.where(parent_id: nil).order(created_at: :desc)
+  end 
 
   private 
 

@@ -125,3 +125,7 @@ body {
   height: 510px; /* Adjust this height as needed */
   object-fit: cover; /* This ensures the image covers the container without distortion */
 }
+
+.sub-comments{
+    padding-left: 25px;
+}
