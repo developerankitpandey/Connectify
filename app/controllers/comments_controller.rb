@@ -10,6 +10,19 @@ class CommentsController < ApplicationController
         redirect_to @post, notice: "Enter valid comment"
       end
   end
+
+  def edit 
+    @comment = @post.comments.find_by(id: params[:id])
+  end 
+
+  def update 
+    @comment = @post.comments.find_by(id: params[:id])
+    if @comment.save(comment_params)
+      redirect_to @post, notice: "Comment updated successfully"
+    else  
+      render :edit, status: :unprocessable_entity
+    end 
+  end 
   
   def destroy
     @comment = @post.comments.find_by(id: params[:id])

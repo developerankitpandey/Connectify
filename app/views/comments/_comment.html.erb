@@ -8,6 +8,7 @@
     <div class="ml-4 sub-comments">
       <% comment.replies.each do |reply| %>
         <%= render reply %>
+        <%= link_to "delete", post_comment_path(comment.post, reply), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %>
       <% end %>
     </div>
   <% end %>
