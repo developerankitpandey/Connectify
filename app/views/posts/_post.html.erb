@@ -14,7 +14,18 @@
   </p>
 </div>
 
+ <div class="post-actions post-actions-<%= post.id %>">
+    <%= render "likes/like_button", post: post %>
+  </div>
+  <span><%= post.like_count %></span>
+
 <details>
   <summary>comment</summary>
    <%= render post.comments.where(parent_id: nil) %>
 </details>
+
+<script>
+  // app/views/likes/create.js.erb
+$(".post-actions-<%= post.id %>").html("<%= j render 'likes/like_button', post: post %>");
+
+</script>
