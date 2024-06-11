@@ -1,0 +1,13 @@
+<!-- app/views/rooms/show.html.erb -->
+<h1><%= @room.name %></h1>
+
+<div id="messages">
+  <%= render @messages %>
+</div>
+
+<%= form_with(model: [ @room, @message ], remote: true) do |form| %>
+  <div class="form-group">
+    <%= form.text_area :content, class: 'form-control', id: 'message_content' %>
+  </div>
+  <%= form.submit 'Send', class: 'btn btn-primary' %>
+<% end %>

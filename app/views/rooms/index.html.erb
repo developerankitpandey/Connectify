@@ -1,0 +1,11 @@
+<!-- app/views/rooms/index.html.erb -->
+<h1>Rooms</h1>
+<%= link_to 'New Room', new_room_path, class: 'btn btn-primary' %>
+
+<ul>
+  <% @rooms.each do |room| %>
+    <li>
+      <%= link_to room.name, room_path(room) %>
+    </li>
+  <% end %>
+</ul>
