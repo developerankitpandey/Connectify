@@ -39,8 +39,12 @@
                     <small><%= time_ago_in_words(post.created_at) %> ago</small>
                   </p>
                 </div>
-                <div class="card-footer">
-                  <%= link_to "Comment", "#", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#commentsModal-#{post.id}" } %>
+                <div class="card-footer d-flex">
+                  <div class="post-actions post-actions-<%= post.id %> mx-2">
+                    <%= render "likes/like_button", post: post %>
+                  </div>
+                  <span><%= post.like_count %></span>
+                  <%= link_to "Comment", "#", class: "btn btn-primary mx-5", data: { bs_toggle: "modal", bs_target: "#commentsModal-#{post.id}" } %>
                 </div>
               </div>
             </div>
