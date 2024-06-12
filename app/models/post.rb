@@ -17,5 +17,5 @@ class Post < ApplicationRecord
 
     def like_count 
       likes.count
-    end 
+    end
 end

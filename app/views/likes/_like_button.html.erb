@@ -1,4 +1,6 @@
-<% if post.liked_by?(current_user) %>
+<div class="card-footer d-flex">
+  <div class="post-actions post-actions-<%= post.id %> mx-2">
+    <% if post.liked_by?(current_user) %>
       <%= link_to post_likes_path(post, post.likes.find_by(user: current_user)), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
@@ -10,4 +12,34 @@
         <i class="bi bi-heart"></i> Like
       <% end %>
     <% end %>
-    
+  </div>
+  <span><%= post.like_count %></span>
+  <%= link_to "Comment", "#", class: "btn btn-primary mx-5", data: { bs_toggle: "modal", bs_target: "#commentsModal-#{post.id}" } %>
+</div>
+
+ <!-- Modal Structure for Comments -->
+            <div class="modal fade" id="commentsModal-<%= post.id %>" tabindex="-1" aria-labelledby="commentsModalLabel-<%= post.id %>" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="commentsModalLabel-<%= post.id %>">Comments</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="comments-container-<%= post.id %>">
+                      <%= render post.comments.where(parent_id: nil).order(created_at: :desc) %>
+                    </div>
+                    <h3>Add a comment</h3>
+                    <%= form_with(model: [ post, post.comments.build ]) do |form| %>
+                      <div class="form-group">
+                        <%= form.label :body %>
+                        <%= form.text_area :body, class: "form-control" %>
+                      </div>
+                      <div class="form-group mt-2">
+                        <%= form.submit "Add comment", class: "btn btn-primary" %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>

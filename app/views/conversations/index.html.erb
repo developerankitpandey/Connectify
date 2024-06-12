@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+       <h1>Conversations</h1>
+      <%= form_with url: conversations_path, local: true do |form| %>
+        <div class="form-group">
+          <%= form.label :receiver_id, "Start a conversation with:" %>
+          <%= form.collection_select :receiver_id, User.where.not(id: current_user.id), :id, :email, prompt: true %>
+        </div>
+        <%= form.hidden_field :sender_id, value: current_user.id %>
+        <%= form.submit "Start Conversation", class: "btn btn-primary" %>
+      <% end %>
+
+      <ul>
+        <% @conversations.each do |conversation| %>
+          <li>
+            <%= link_to "Conversation with #{conversation.receiver.email if conversation.sender_id == current_user.id}#{conversation.sender.email if conversation.receiver_id == current_user.id}", conversation_messages_path(conversation) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

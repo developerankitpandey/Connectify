@@ -21,3 +21,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // Ensure jQuery is available globally
 global.$ = jQuery;
+
+//= require jquery
+//= require rails-ujs
+//= require_tree .import "channels"

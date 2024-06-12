@@ -1,30 +1,33 @@
 class MessagesController < ApplicationController
-    before_action :authenticate_user!
-    before_action :set_room
-  
-    def create
-      @message = @room.messages.build(message_params)
-      @message.user = current_user
-      if @message.save
-        ActionCable.server.broadcast "chat_#{@room.id}_channel", message: render_message(@message)
-        head :ok
-      else
-        redirect_to @room, alert: 'Message could not be sent.'
-      end
-    end
-  
-    private
-  
-    def set_room
-      @room = Room.find(params[:room_id])
-    end
-  
-    def message_params
-      params.require(:message).permit(:content)
-    end
-  
-    def render_message(message)
-      ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
-    end
+  before_action :set_conversation
 
+  def index
+    @messages = @conversation.messages.order(created_at: :asc)
+  end
+
+  def create
+    @message = @conversation.messages.new(message_params)
+    @message.user = current_user
+    if @message.save
+      ActionCable.server.broadcast "conversation_#{@conversation.id}", render_message(@message)
+      head :ok
+    else
+      @messages = @conversation.messages.order(created_at: :asc)
+      render :index
+    end
+  end
+
+  private
+
+  def set_conversation
+    @conversation = Conversation.find(params[:conversation_id])
+  end
+
+  def message_params
+    params.require(:message).permit(:content)
+  end
+
+  def render_message(message)
+    MessagesController.renderer.render(partial: 'messages/message', locals: { message: message })
+  end
 end

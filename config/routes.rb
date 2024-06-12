@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'devise/sessions#destroy'
   end
   
-  resources :rooms do
-    resources :messages, only: [:create]
+  resources :conversations, only: [:index, :create] do
+    resources :messages, only: [:index, :create]
   end
   
   resources :posts do 

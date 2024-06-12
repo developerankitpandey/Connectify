@@ -1,0 +1,22 @@
+<!-- app/views/messages/index.html.erb -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Messages</h1>
+    <div id="messages">
+      <% if @messages&.any? %>
+        <%= render @messages %>
+      <% else %>
+        <p>No messages yet.</p>
+      <% end %>
+    </div>
+
+    <%= form_with(model: [ @conversation, @conversation.messages.build ], remote: true) do |form| %>
+      <div class="form-group">
+        <%= form.text_area :content, class: 'form-control', id: 'message_content' %>
+      </div>
+      <%= form.submit 'Send', class: 'btn btn-primary' %>
+    <% end %>
+    </div>
+  </div>
+</div>
