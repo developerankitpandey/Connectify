@@ -129,3 +129,26 @@ body {
 .sub-comments{
     padding-left: 25px;
 }
+
+.message {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  max-width: 60%;
+}
+
+.message.left {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+
+.message.right {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+}
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+}

@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_action :set_conversation
 
   def index
-    @messages = @conversation.messages.order(created_at: :asc)
+    @messages = @conversation&.messages&.order(created_at: :asc)
   end
 
   def create
@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
   private
 
   def set_conversation
-    @conversation = Conversation.find(params[:conversation_id])
+    @conversation = Conversation.find_by(id: params[:conversation_id])
   end
 
   def message_params
