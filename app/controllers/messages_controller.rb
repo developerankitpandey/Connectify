@@ -7,10 +7,10 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.new(message_params)
-    @message.user = current_user
+    @message.user_id = current_user.id
     if @message.save
       ActionCable.server.broadcast "conversation_#{@conversation.id}", render_message(@message)
-      head :ok
+      redirect_to conversation_messages_path
     else
       @messages = @conversation.messages.order(created_at: :asc)
       render :index

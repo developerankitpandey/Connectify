@@ -138,7 +138,7 @@ body {
 }
 
 .message.left {
-  background-color: #f1f1f1;
+  background-color: var(--secondary-color);
   align-self: flex-start;
 }
 

@@ -5,17 +5,17 @@
       <h1>Messages</h1>
     <div id="messages">
       <% if @messages&.any? %>
-        <%= render @messages %>
+        <%= render @messages, current_user: current_user %>
       <% else %>
         <p>No messages yet.</p>
       <% end %>
     </div>
 
-    <%= form_with(model: [ @conversation, @conversation.messages.build ], remote: true) do |form| %>
+    <%= form_with(model: [ @conversation, @conversation.messages.build ]) do |form| %>
       <div class="form-group">
-        <%= form.text_area :content, class: 'form-control', id: 'message_content' %>
+        <%= form.text_area :content, class: 'form-control', id: 'message_content', class: 'form-control mx-3 my-4' %>
       </div>
-      <%= form.submit 'Send', class: 'btn btn-primary' %>
+      <%= form.submit 'Send', class: 'btn btn-primary mx-3 my-4' %>
     <% end %>
     </div>
   </div>
