@@ -25,3 +25,7 @@ global.$ = jQuery;
 //= require jquery
 //= require rails-ujs
 //= require_tree .import "channels"
+window.jQuery = $;
+window.$ = $;
+
+import "channels"

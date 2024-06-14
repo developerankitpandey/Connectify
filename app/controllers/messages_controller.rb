@@ -8,15 +8,20 @@ class MessagesController < ApplicationController
   def create
     @message = @conversation.messages.new(message_params)
     @message.user_id = current_user.id
-    if @message.save
-      ActionCable.server.broadcast "conversation_#{@conversation.id}", render_message(@message)
-      redirect_to conversation_messages_path
-    else
-      @messages = @conversation.messages.order(created_at: :asc)
-      render :index
+    respond_to do |format|
+      if @message.save
+        ActionCable.server.broadcast "conversation_#{@conversation.id}", render_message(@message)
+        format.js { render 'create' }
+      else
+        format.js { render 'create' } # You might want to handle errors here as well
+      end
     end
   end
 
+  def show 
+    @message = @conversation.messages.find_by(id: params[:id])
+  end
+  
   private
 
   def set_conversation

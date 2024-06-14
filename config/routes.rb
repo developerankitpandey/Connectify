@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
   
   resources :conversations, only: [:index, :create] do
-    resources :messages, only: [:index, :create]
+    resources :messages, only: [:index, :create, :show]
   end
   
   resources :posts do 
@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   end
 
   resources :home, only: [:index] 
-  get 'profile/index'
+  resources :profile, only: [ :index, :create, :new, :show, :update ]
 end

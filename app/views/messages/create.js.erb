@@ -1,3 +1,6 @@
-<!-- app/views/messages/create.js.erb -->
-$("#messages").append("<%= j render @message %>");
-$("#message_content").val("");
+<% if @message.persisted? %>
+  $("#messages").append("<%= j render(@message) %>");
+  $("#message_content").val(''); // Clear the text area
+<% else %>
+  alert("Message could not be saved");
+<% end %>

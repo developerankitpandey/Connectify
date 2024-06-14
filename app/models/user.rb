@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :messages
   has_many :rooms, through: :messages
   has_many :conversations
+  has_one :profile, dependent: :destroy
 end

@@ -10,3 +10,4 @@
 </section>
 
 <%= render "layouts/shared/post_index", posts: @posts %>
+<%= button_to 'Create/Edit Profile', new_profile_path, method: :get, form_class: 'btn btn-primary', data: { turbo_frame: 'profile_form' } %>
