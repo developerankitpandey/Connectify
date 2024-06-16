@@ -7,8 +7,8 @@
   <% if comment.replies.any? %>
     <div class="ml-4 sub-comments">
       <% comment.replies.each do |reply| %>
-        <%= render reply %>
-        <%= link_to "delete", post_comment_path(comment.post, reply), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %>
+      <span><%= render reply %></span>
+      <span> <%= link_to "delete", post_comment_path(comment.post, reply), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></span> 
       <% end %>
     </div>
   <% end %>
@@ -17,13 +17,13 @@
       <%= form.hidden_field :parent_id, value: comment.id %>
       <div class="form-group">
         <details><summary>Reply</summary>
-        <%= form.label :body %>
          <%= form.text_area :body %>
+         <div class="form-group mt-2">
+         <%= form.submit "submit", class: "btn btn-secondary btn-sm" %>
+       </div>
         </details>
       </div>
-      <div class="form-group mt-2">
-        <%= form.submit "submit", class: "btn btn-secondary btn-sm" %>
-      </div>
+     
     <% end %>
   </div>
 </div>
