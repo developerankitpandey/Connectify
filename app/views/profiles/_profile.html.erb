@@ -1,0 +1,13 @@
+<!-- app/views/profile/_profile.html.erb -->
+<div id="profile_<%= profile.id %>" class="card shadow-sm mb-5 mt-5">
+  <div class="card-body">
+    <h2 class="card-title">Profile Information</h2>
+    <p><strong>User Name:</strong> <%= profile.first_name %></p>
+    <p><strong>Email:</strong> <%= current_user.email %></p>
+    <p><strong>Bio:</strong> <%= profile.bio %></p>
+    <p><strong>Location:</strong> <%= profile.location %></p>
+    <p><strong>Birthday:</strong> <%= profile.birthday %></p>
+    <p><strong>Gender:</strong> <%= profile.gender %></p>
+    <%= link_to 'Edit Profile', edit_profile_path(profile), class: "btn btn-primary", data: { turbo_frame: "profile_form" } %>
+  </div>
+</div>

@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   end
 
   resources :home, only: [:index] 
-  resources :profile, only: [ :index, :create, :new, :show, :update ]
+  resources :profiles, only: [:index, :new, :create, :edit, :update, :show]
 end

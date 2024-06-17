@@ -1,0 +1,26 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+    <% if current_user.profile.nil? %>
+    <%= button_to 'Create Profile', new_profile_path, method: :get, class: 'btn btn-primary', data: { turbo_frame: 'profile_form' } %>
+    <%= turbo_frame_tag 'profile_form' %>
+    <% else %>
+    <%= render 'profiles/profile', profile: current_user.profile %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<section class="mb-3" >
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h5 class="text-center"><%= current_user.email %></h5>
+        <%= link_to "New post", new_post_path, class: "btn btn-success" %> 
+      </div>
+    </div>
+  </div>    
+</section>
+
+<%= render "layouts/shared/post_index", posts: @posts %>

@@ -29,3 +29,10 @@ window.jQuery = $;
 window.$ = $;
 
 import "channels"
+
+// Turbo.session.drive = false
+
+
+// $(document).on('ajax:error', '.post-actions a', function(event) {
+//   alert('An error occurred while processing your request.');
+// });
