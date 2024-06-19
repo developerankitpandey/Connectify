@@ -9,7 +9,7 @@
                 <% if post.images.attached? %>
                   <% if post.images.count == 1 %>
                     <% image = post.images.first %>
-                    <%= image_tag image, class: "card-img-top card-img-top-fixed", data: { url: post_path(post) } %>
+                    <%= link_to image_tag(image, class: "d-block w-100 card-img-top card-img-top-fixed"), post_path(post) %>
                   <% else %>
                     <div id="carousel-<%= post.id %>" class="carousel slide" data-bs-ride="carousel">
                       <div class="carousel-inner">
